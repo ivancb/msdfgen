@@ -69,12 +69,32 @@ include_directories("include")
 folderize_sources(msdfgen_HEADERS ${CMAKE_SOURCE_DIR})
 folderize_sources(msdfgen_SOURCES ${CMAKE_SOURCE_DIR})
 
-add_library(lib_msdfgen ${msdfgen_SOURCES} ${msdfgen_HEADERS})
+add_library(lib_msdfgen STATIC ${msdfgen_SOURCES} ${msdfgen_HEADERS})
 set_target_properties(lib_msdfgen PROPERTIES OUTPUT_NAME msdfgen)
 target_link_libraries(lib_msdfgen ${FREETYPE_LIBRARIES})
 
-# Build the executable
+install (TARGETS lib_msdfgen
+	RUNTIME DESTINATION bin
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+)
 
-add_executable(msdfgen main.cpp msdfgen.h msdfgen-ext.h)
-target_compile_definitions(msdfgen PRIVATE MSDFGEN_STANDALONE)
-target_link_libraries(msdfgen lib_msdfgen)
+install (
+	FILES "${CMAKE_SOURCE_DIR}/msdfgen.h" 
+	DESTINATION include/msdfgen
+)
+
+install (
+	FILES "${CMAKE_SOURCE_DIR}/msdfgen-ext.h" 
+	DESTINATION include/msdfgen
+)
+
+install (
+	DIRECTORY "${CMAKE_SOURCE_DIR}/core" 
+	DESTINATION include/msdfgen
+)
+
+install (
+	DIRECTORY "${CMAKE_SOURCE_DIR}/ext" 
+	DESTINATION include/msdfgen
+)

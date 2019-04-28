@@ -6,13 +6,13 @@
 namespace msdfgen {
 
 static void initDistance(double &distance) {
-    distance = SignedDistance::INFINITE.distance;
+    distance = SignedDistance::c_INFINITE.distance;
 }
 
 static void initDistance(MultiDistance &distance) {
-    distance.r = SignedDistance::INFINITE.distance;
-    distance.g = SignedDistance::INFINITE.distance;
-    distance.b = SignedDistance::INFINITE.distance;
+    distance.r = SignedDistance::c_INFINITE.distance;
+    distance.g = SignedDistance::c_INFINITE.distance;
+    distance.b = SignedDistance::c_INFINITE.distance;
 }
 
 static double resolveDistance(double distance) {
